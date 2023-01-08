@@ -1,0 +1,9 @@
+// make a migration
+php artisan make:migration CreateStudentsTable
+
+// make facrory for model
+php artisan make:factory StudentFactory --model=Student
+
+//
+run seeder file
+php artisan db:seed --class=StudentSeeder
