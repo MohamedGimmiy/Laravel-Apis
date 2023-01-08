@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StudentLoginRequest;
 use App\Http\Requests\StudentRequest;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -24,9 +25,10 @@ class StudentController extends Controller
         ]);
     }
     // LOGIN API
-    public function login(Request $request)
+    public function login(StudentLoginRequest $request)
     {
-        # code...
+
+        return  Student::logingHandling($request);
     }
     //PROFILE API
     public function profile()
