@@ -13,6 +13,7 @@ use Throwable;
 class ApiController extends Controller
 {
     // Create API - POST
+    // URL: http://127.0.0.1:8000/api/create-employee
     public function createEmployee(EmployeeRequest $request)
     {
         //create data
@@ -25,6 +26,7 @@ class ApiController extends Controller
 
     }
     // List API - GET
+    // URL: http://127.0.0.1:8000/api/list-employees
     public function listEmployees()
     {
         return response()->json([
@@ -34,6 +36,7 @@ class ApiController extends Controller
     }
 
     // Single Detail API - GET
+    // URL: http://127.0.0.1:8000/api/single-employee/1
     public function getSingleEmployee($id)
     {
         try{
@@ -49,7 +52,9 @@ class ApiController extends Controller
             'employee' => $employee
          ], 200);
     }
+
     // Update API - PUT
+    // URL: http://127.0.0.1:8000/api/update-employee/11
     public function updateEmployee(EmployeeRequest $request, $id)
     {
         try {
@@ -65,6 +70,7 @@ class ApiController extends Controller
         }
     }
     // Delete API - DELETE
+    // URL: http://127.0.0.1:8000/api/delete-employee/2
     public function deleteEmployee($id)
     {
         try {
