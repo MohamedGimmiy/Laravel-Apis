@@ -3,45 +3,79 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EmployeeRequest;
 use App\Models\Employee;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Throwable;
 
 class ApiController extends Controller
 {
     // Create API - POST
-    public function createEmployee(Request $request)
+    public function createEmployee(EmployeeRequest $request)
     {
-        //validation
-        $validated = $request->validate([
-            'name' => 'required|min:4|max:50',
-            'email' => 'required|min:7|max:50|email|unique:employees',
-            'phone_no' => 'required|min:8|max:20',
-            'gender' =>'required',
-            'age' => 'required'
-        ]);
         //create data
-        Employee::create($validated);
+        Employee::create($request->validated());
         //send response
         return response()->json([
             'status' => 1,
             'message' => 'Employee created successfully'
         ]);
+
     }
     // List API - GET
     public function listEmployees()
     {
+        return response()->json([
+            'status' => 1,
+            'employees' => Employee::all()
+        ]);
     }
 
     // Single Detail API - GET
     public function getSingleEmployee($id)
     {
+        try{
+            $employee = Employee::findOrFail($id);
+        }
+        catch(Exception $e){
+            return response()->json([
+                'Employee not found'
+            ], 404);
+        }
+
+         return response()->json([
+            'employee' => $employee
+         ], 200);
     }
     // Update API - PUT
-    public function updateEmployee(Request $request, $id)
+    public function updateEmployee(EmployeeRequest $request, $id)
     {
+        try {
+            $employee = Employee::findOrFail($id);
+            $employee->update($request->all());
+            return response()->json([
+                'Employee updated successfully!'
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'Error occured Failed to update Employee Not Found'
+            ],404);
+        }
     }
     // Delete API - DELETE
     public function deleteEmployee($id)
     {
+        try {
+            Employee::findOrFail($id)->delete();
+            return response()->json([
+                'Employee deleted successfully!'
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'Error Occured Failed to delete Employee Not Found'
+            ],404);
+        }
     }
 }
