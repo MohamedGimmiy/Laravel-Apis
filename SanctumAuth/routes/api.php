@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('register',[StudentController::class, 'register']);
 Route::post('login',[StudentController::class, 'login']);
+
 Route::group(['middleware' => 'auth:sanctum'], function (){
     Route::get('profile', [StudentController::class, 'profile']);
     Route::get('logout', [StudentController::class, 'logout']);
@@ -30,4 +31,3 @@ Route::group(['middleware' => 'auth:sanctum'], function (){
     Route::get('single-project/{id}', [ProjectController::class, 'singleProject']);
     Route::delete('delete-project/{id}', [ProjectController::class, 'deleteProject']);
 });
-Route::get()

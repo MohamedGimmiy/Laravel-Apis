@@ -12,4 +12,5 @@ class Student extends Model
     protected $table = 'students';
     public  $timestamps = false;
     protected $guarded = [];
+
 }
