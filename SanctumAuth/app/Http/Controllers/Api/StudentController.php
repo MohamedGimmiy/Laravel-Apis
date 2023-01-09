@@ -41,6 +41,10 @@ class StudentController extends Controller
     // LOGOUT API
     public function logout()
     {
-        # code...
+        auth()->user()->tokens()->delete();
+        return response()->json([
+            'status' => 1,
+            'message' => 'Student logged out successfully'
+        ]);
     }
 }
