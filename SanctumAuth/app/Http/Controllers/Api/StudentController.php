@@ -27,13 +27,16 @@ class StudentController extends Controller
     // LOGIN API
     public function login(StudentLoginRequest $request)
     {
-
         return  Student::logingHandling($request);
     }
     //PROFILE API
     public function profile()
     {
-        # code...
+        return response()->json([
+            'status' => 1,
+            'message' => 'Student profile information',
+            'profile' => auth()->user()
+        ]);
     }
     // LOGOUT API
     public function logout()
