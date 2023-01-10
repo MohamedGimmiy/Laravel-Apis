@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     use HasFactory;
-    protected $table = 'courses';
-    public $timestamps = false;
     protected $guarded = [];
+    public $timestamps = false;
 }
